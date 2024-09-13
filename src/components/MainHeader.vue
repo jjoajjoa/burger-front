@@ -25,4 +25,5 @@ function goToHome() {
             </div>
         </div>
     </div>
+    <div>저는 지유입니다ㅋ안뇽하세용</div>
 </template>
