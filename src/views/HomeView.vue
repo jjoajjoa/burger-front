@@ -19,4 +19,5 @@ import MainContents from '@/components/MainContents.vue';
             </div>
         </div>
     </div>
+    <div>나는 지유다</div>
 </template>
