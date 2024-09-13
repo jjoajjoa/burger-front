@@ -4,7 +4,7 @@ module.exports = defineConfig({
     transpileDependencies: true,
     
     // Vue 빌드 파일을 Spring Boot의 static 폴더로 출력
-    outputDir: "../../fivegirls-back/burger/src/main/resources/static", 
+    outputDir: "../../back/burger-back/burger/src/main/resources/static",
     
     devServer: {
         proxy: {
