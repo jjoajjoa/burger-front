@@ -19,4 +19,5 @@ import MainContents from '@/components/MainContents.vue';
             </div>
         </div>
     </div>
+    <button>지유버튼</button>
 </template>
