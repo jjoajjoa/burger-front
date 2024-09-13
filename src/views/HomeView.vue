@@ -13,6 +13,8 @@ import MainContents from '@/components/MainContents.vue';
                     <div id="kt_app_content_container" class="app-container container-xxl">
                         <div class="d-flex flex-column flex-xl-row">
                             <MainContents />
+                            <h1>이정현</h1>
+                            <h1>Five Girls</h1>
                         </div>
                     </div>
                 </div>
