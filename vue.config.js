@@ -11,7 +11,11 @@ module.exports = defineConfig({
             '/api': { // '/api'로 시작하는 요청을 Spring Boot 서버로 프록시
                 target: 'http://localhost:9000',
                 changeOrigin: true // CORS 문제 해결
-            }
+            },
+            '/board': {
+                target: 'http://localhost:9000',
+                changeOrigin: true
+            },
         }
     }
 });
