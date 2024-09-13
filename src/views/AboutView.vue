@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>amin page</h1>
+    <h1>burger yum!</h1>
   </div>
 </template>
