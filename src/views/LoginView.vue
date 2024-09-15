@@ -1,6 +1,5 @@
 <script setup>
 import MainHeader from '@/components/MainHeader.vue';
-import MainFooter from '@/components/MainFooter.vue'
 import MainContents from '@/components/MainContents.vue';
 </script>
 
@@ -20,7 +19,4 @@ import MainContents from '@/components/MainContents.vue';
             </div>
         </div>
     </div>
-
-    <MainFooter/>
-
 </template>
