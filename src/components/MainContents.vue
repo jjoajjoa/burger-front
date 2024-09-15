@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import GameMenu from '@/components/menu/GameMenu.vue';
 
 // 버튼 텍스트를 저장할 반응형 변수
 const buttonText = ref('');
@@ -46,6 +47,7 @@ fetchData();
             <input type="submit" class="btn btn-primary" value="Submit">
         </form>
     </div>
+    <GameMenu />
 
 </template>
 

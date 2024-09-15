@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import GamePlay from '@/components/menu/GamePlay.vue'
 
 const routes = [
     {
@@ -11,6 +12,11 @@ const routes = [
         path: '/about',
         name: 'about',
         component: () => import('../views/AboutView.vue')
+    },
+    {
+        path: '/burgergame/:burgerId',
+        name: 'burgergame',
+        component: GamePlay,
     },
 ]
 
