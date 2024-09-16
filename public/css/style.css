@@ -23,11 +23,11 @@
 
 .nav-center {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-grow: 1;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0px 0px 0px 20px;
 }
 
 .nav-right {
@@ -36,6 +36,15 @@
     padding: 0;
     display: flex;
     justify-content: flex-end;
+    white-space: nowrap; /* 한 줄로 표시되도록 강제 */
+}
+
+.nav-right li {
+    margin: 0 10px; /* 여백을 추가해서 간격 조절 */
+    white-space: nowrap; /* 이정현님을 한 줄로 표시 */
+    overflow: hidden; /* 텍스트가 길면 넘어가는 부분을 숨김 */
+    text-overflow: ellipsis; /* 너무 길면 생략(...) 처리 */
+    max-width: 100px; /* 너무 긴 이름을 제한 */
 }
 
 .nav-center li,
@@ -52,7 +61,7 @@
 
 .nav-center li a:hover,
 .nav-right li a:hover {
-    color: rgb(255, 38, 0);
+    color: #d81f26;
 }
 
 
