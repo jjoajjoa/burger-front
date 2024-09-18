@@ -6,6 +6,9 @@ import FindAccountView from '../views/FindAccountView.vue'
 import GamePlay from '@/components/menu/GamePlay.vue'
 import MypageProfileView from '../views/MypageProfileView.vue'
 import MypageBoardView from '../views/MypageBoardView.vue'
+import BoardView from '../views/BoardView.vue'
+import AddBoardView from '../views/AddBoardView.vue'
+import BoardDetailView from '@/views/BoardDetailView.vue';
 
 const routes = [
     {
@@ -47,7 +50,23 @@ const routes = [
         path: '/myboard',
         name: 'myboard',
         component: MypageBoardView
-    }
+    },
+    {
+        path: '/board',
+        name: 'board',
+        component: BoardView
+    },
+    {
+        path: '/addboard',
+        name: 'addboard',
+        component: AddBoardView
+    },
+    {
+        path: '/board/:boardPk',
+        name: 'BoardDetail',
+        component: BoardDetailView,
+        props: true,
+    },
 ]
 
 const router = createRouter({
