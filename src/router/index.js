@@ -4,6 +4,8 @@ import LoginView from '../views/LoginView.vue'
 import SignUpView from '../views/SignUpView.vue'
 import FindAccountView from '../views/FindAccountView.vue'
 import GamePlay from '@/components/menu/GamePlay.vue'
+import BoardView from '../views/BoardView.vue'
+import BoardDetail from '@/components/board/BoardDetail.vue'
 
 const routes = [
     {
@@ -35,7 +37,18 @@ const routes = [
         path: '/findaccount',
         name: 'findaccount',
         component: FindAccountView
-    }
+    },
+    {
+        path: '/board',
+        name: 'board',
+        component: BoardView,
+    },
+    {
+        path: '/board/:id',
+        name: 'board-detail',
+        component: BoardDetail,
+    },
+
 ]
 
 const router = createRouter({
