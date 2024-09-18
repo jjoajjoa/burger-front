@@ -12,7 +12,7 @@ module.exports = defineConfig({
                 target: 'http://localhost:9000',
                 changeOrigin: true // CORS 문제 해결
             },
-            '/board': {
+            '/boards': {
                 target: 'http://localhost:9000',
                 changeOrigin: true
             },
