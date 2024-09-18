@@ -1,3 +1,10 @@
+.tomato {
+    border: 2px solid tomato;
+}
+.olive {
+    border: 2px solid olive;
+}
+
 /* 헤더 */
 .header {
     display: flex;
@@ -175,4 +182,26 @@
 
 .footer-legal a:hover {
     text-decoration: underline;
+}
+
+
+/* 헤더 - 메뉴 */
+.image-container {
+    position: relative;
+    width: 100%;
+}
+
+.menu-image {
+    width: 100%;
+}
+
+.header-text {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: white; 
+    font-size: 4rem;
+    font-weight: bold; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
