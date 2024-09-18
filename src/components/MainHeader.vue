@@ -32,6 +32,10 @@ function goToLoginpage() {
     router.replace({ path: '/login' });
 }
 
+// 로그인 페이지로 이동 함수
+function goToBoard() {
+    router.replace({ path: '/board' });
+}
 
 // 마이페이지로 이동 함수
 function goToMypage() {
@@ -55,7 +59,7 @@ function goToMypage() {
             <ul class="nav-center">
                 <li><a href="#">Menu</a></li>
                 <li><a href="#">Burger King</a></li>
-                <li><a href="#">Board</a></li>
+                <li><a @click="goToBoard" href="#">Board</a></li>
                 <li><a @click="goToMypage" href="#">My Page</a></li>
             </ul>
             <ul class="nav-right" style="cursor: pointer;">

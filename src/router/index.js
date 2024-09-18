@@ -7,8 +7,8 @@ import GamePlay from '@/components/menu/GamePlay.vue'
 import MypageProfileView from '../views/MypageProfileView.vue'
 import MypageBoardView from '../views/MypageBoardView.vue'
 import BoardView from '../views/BoardView.vue'
-import BoardDetail from '@/components/board/BoardDetail.vue'
-
+import AddBoardView from '../views/AddBoardView.vue'
+import BoardDetailView from '@/views/BoardDetailView.vue';
 
 const routes = [
     {
@@ -54,12 +54,18 @@ const routes = [
     {
         path: '/board',
         name: 'board',
-        component: BoardView,
+        component: BoardView
     },
     {
-        path: '/board/:id',
-        name: 'board-detail',
-        component: BoardDetail,
+        path: '/addboard',
+        name: 'addboard',
+        component: AddBoardView
+    },
+    {
+        path: '/board/:boardPk',
+        name: 'BoardDetail',
+        component: BoardDetailView,
+        props: true,
     },
 ]
 
