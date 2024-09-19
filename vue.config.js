@@ -16,6 +16,13 @@ module.exports = defineConfig({
                 target: 'http://localhost:9000',
                 changeOrigin: true
             },
+            '/burgerking': {
+                target: 'http://localhost:9000',
+                changeOrigin: true
+            },
         }
+    },
+    configureWebpack: {
+        devtool: 'source-map'
     }
 });
