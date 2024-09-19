@@ -9,6 +9,7 @@ import MypageBoardView from '../views/MypageBoardView.vue'
 import BoardView from '../views/BoardView.vue'
 import CreateBoardView from '../views/CreateBoardView.vue'
 import BoardDetailView from '@/views/BoardDetailView.vue';
+import BurgerKingView from '@/views/BurgerKingView.vue'
 
 const routes = [
     {
@@ -66,6 +67,11 @@ const routes = [
         name: 'BoardDetail',
         component: BoardDetailView,
         props: true,
+    },
+    {
+        path: '/burgerking',
+        name: 'burgerking',
+        component: BurgerKingView,
     },
 ]
 
