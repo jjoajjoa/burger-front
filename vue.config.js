@@ -21,5 +21,8 @@ module.exports = defineConfig({
                 changeOrigin: true
             },
         }
+    },
+    configureWebpack: {
+        devtool: 'source-map'
     }
 });
