@@ -73,16 +73,14 @@
 
 /* 푸터 */
 .app-main {
-    height: 100vh;
-    padding-bottom: 300px;
+    min-height: 750px;
 }
 
 .footer {
     background-color: #000;
     color: white;
-    padding: 40px 20px;
+    padding: 20px;
     text-align: center;
-    position: fixed;
     bottom: 0;
     width: 100%;
     left: 0;
@@ -97,7 +95,7 @@
 
 .footer-logo h1 {
     color: white;
-    font-size: 28px;
+    font-size: 4rem;
 }
 
 .footer-sections {
@@ -156,15 +154,9 @@
 
 .footer-red {
     background-color: #d81f26;
-    /* 빨간색 하단 영역 */
     padding: 10px 0;
-    width: 100vw;
-    /* 뷰포트 전체 너비 */
-    margin-left: calc(-50vw + 50%);
-    /* 좌우 여백 제거 */
     position: relative;
     bottom: 0;
-    /* 맨 아래로 붙이기 */
 }
 
 .footer-legal {
@@ -191,38 +183,45 @@
 }
 
 /* 메인화면 */
+.image-gallery {
+    position: relative;
+    display: flex;
+    height: 750px;
+    width: 100%;
+}
+
 .image-container-main {
     display: grid;
     grid-template-columns: 2.5fr 1.3fr;
-    width: 100vw;
-    height: calc(100vh - var(--header-height) - var(--footer-height));
-}
-
-.large-image {
-    grid-column: 1 / 2;
-    grid-row: 1;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.small-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .large-image-container {
     position: relative;
+}
+
+.large-image {
     width: 100%;
     height: 100%;
+    object-fit: cover; 
 }
+
+.small-image {
+    width: 100%;
+    height: 100%; /* 부모 요소에 맞게 꽉 채움 */
+    object-fit: cover; /* 이미지가 영역을 꽉 채우며 자를 수 있게 설정 */
+}
+
+.right-images {
+    position: relative; /* 자식 요소의 절대 위치를 위한 설정 */
+}
+
 .overlay-text {
     position: absolute;
     left: 50%;
     color: white;
-    font-size: 24px;
+    font-size: 5rem;
     font-weight: bold;
     text-align: center;
     transform: translate(-50%, -50%); /* 가로 및 세로 정가운데로 이동 */
@@ -230,25 +229,21 @@
 }
 
 .overlay-text:nth-child(1) {
-    top: 25%; /* 첫 번째 줄 위치 */
+    top: 15%; /* 첫 번째 줄 위치 */
 }
 
 .overlay-text:nth-child(2) {
-    top: 50%; /* 두 번째 줄 중앙 */
+    top: 60%; /* 두 번째 줄 중앙 */
 }
 
 .overlay-text:nth-child(3) {
-    top: 65%; /* 세 번째 줄 위치 */
+    top: 25%; /* 세 번째 줄 위치 */
 }
 
 @media only screen and (max-width: 768px) {
     .overlay-text {
         font-size: 18px;
     }
-}
-
-.right-images {
-    position: relative; /* 자식 요소의 절대 위치를 위한 설정 */
 }
 
 .login-overlay {
@@ -265,7 +260,7 @@
 }
 
 .box {
-    background-color: rgba(255, 255, 255, 0.9); /* 흰색 배경 */
+    background-color: rgba(168, 168, 168, 0.697); /* 흰색 배경 */
     padding: 20px;
     border-radius: 10px; /* 둥근 모서리 */
     font-size: 24px;
@@ -438,4 +433,23 @@
     .card-container {
         flex-basis: 100%;
     }
+}
+
+
+/* 버튼 */
+.btn-red {
+    width: 100%;
+    padding: 10px;
+    background-color: #d81f26;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-red:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
 }
