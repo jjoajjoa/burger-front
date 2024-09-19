@@ -25,6 +25,7 @@ const login = async () => {
 
         if (response.data) {
             localStorage.setItem('username', response.data.userName);
+            localStorage.setItem('userPk', response.data.userPk);
             router.push({ path: '/' }); // 로그인 성공 시 메인 페이지로 이동
         } else {
             alert('로그인 실패');

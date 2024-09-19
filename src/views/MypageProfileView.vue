@@ -73,6 +73,11 @@ const saveChanges = async () => {
     }
 };
 
+// 개인정보수정 페이지로 이동 함수
+function goToProfileInMypage() {
+    router.replace({ path: '/mypage' });
+}
+
 // 내가 작성한 글 페이지로 이동 함수
 function goToBoardInMypage() {
     router.replace({ path: '/myboard' });
@@ -96,7 +101,7 @@ function goToBoardInMypage() {
                                     <div class="level">LV.1</div>
                                     <button class="menu-button">내가 만든 버거</button>
                                     <button @click="goToBoardInMypage" class="menu-button">내가 쓴 게시물</button>
-                                    <button class="menu-button">개인정보 수정</button>
+                                    <button @click="goToProfileInMypage" class="menu-button">개인정보 수정</button>
                                 </div>
                                 <div class="main-content">
                                     <h3 class="title">회원정보</h3>
