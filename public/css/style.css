@@ -71,7 +71,6 @@
     color: #d81f26;
 }
 
-
 /* 푸터 */
 .app-main {
     height: 100vh;
@@ -190,7 +189,9 @@
 .footer-legal a:hover {
     text-decoration: underline;
 }
-.image-container {
+
+/* 메인화면 */
+.image-container-main {
     display: grid;
     grid-template-columns: 2.5fr 1.3fr;
     width: 100vw;
@@ -291,10 +292,6 @@
     font-size: 18px; /* 질문 글자 크기 */
     color: black; /* 질문 글자 색상 */
 }
-
-
-
-
 
 /* 헤더 - 메뉴 */
 .image-container {
