@@ -8,11 +8,13 @@ import router from '@/router/index.js';
 // 로그인 여부를 확인하는 상태 변수
 const isLoggedIn = ref(false);
 
+// 게시글 리스트를 저장하는 배열 : 서버에서 받아온 게시글 데이터를 담음
 const posts = ref([]);
 
+// 서버에서 게시글을 가져오는 API
 onMounted(async () => {
     try {
-        const response = await axios.get('api/boardlist'); // 서버에서 게시글 목록을 가져오는 API
+        const response = await axios.get('api/boardlist'); 
         if (response.status === 200) {
             posts.value = response.data;
         }
@@ -20,25 +22,26 @@ onMounted(async () => {
         console.error('게시글을 가져오는 중 오류 발생:', error);
     }
 
-    try {
-        const response = await axios.get('api/profile'); // 로그인된 사용자의 정보 가져오기
-        if (response.status === 200) {
-            isLoggedIn.value = true; // 사용자가 로그인된 상태라면 true로 설정
-        }
-    } catch (error) {
-        isLoggedIn.value = false; // 로그인되지 않았거나, 오류가 발생하면 false로 설정
-        console.error('로그인 상태 확인 중 오류 발생:', error);
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        isLoggedIn.value = true;
     }
 });
 
-
-// 마이페이지로 이동 함수
-function goToAddboard() {
+// 게시글 추가로 이동 함수
+function goToCreateboard() {
     if (isLoggedIn.value) {
-        router.replace({ path: '/addboard' });
+        router.replace({ path: '/createboard' });
     } else {
         alert('로그인이 필요합니다.');
-        goToLoginpage(); // 로그인 안 된 상태에서 마이페이지 접근 시 로그인 페이지로 이동
+        goToLoginpage(); // 로그인 안 된 상태에서 게시글 추가 접근 시 로그인 페이지로 이동
+    }
+}
+
+// 게시글 상세로 이동 함수
+function goToBoardDetail() {
+    if (!isLoggedIn.value) { alert('로그인이 필요합니다.');
+        goToLoginpage(); // 로그인 안 된 상태에서 게시글 추가 접근 시 로그인 페이지로 이동
     }
 }
 
@@ -62,31 +65,31 @@ function goToLoginpage() {
                     <div class="d-flex flex-column flex-xl-row"
                         style="flex-grow: 1; justify-content: center; align-items: center;">
                         <div class="board-container">
-                            <h3 class="title">게시글 목록</h3>
+                            <h3 class="title">게시판</h3>
                             <table class="board-table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>제목</th>
                                         <th>글쓴이</th>
-                                        <th>작성시간</th>
+                                        <th>작성일자</th>
                                         <th>조회수</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(post, index) in posts" :key="index">
                                         <td>{{ index + 1 }}</td> <!-- 번호 역순 -->
-                                        <td><router-link
+                                        <td><router-link @click="goToBoardDetail()"
                                                 :to="{ name: 'BoardDetail', params: { boardPk: post.boardPk } }">
                                                 {{ post.boardTitle }}
                                             </router-link></td>
-                                        <td>{{ post.userName }}</td>
-                                        <td>{{ new Date(post.boardRegDate).toLocaleDateString() }}</td>
+                                        <td >{{ post.userName }}</td>
+                                        <td>{{ post.boardRegDate }}</td>
                                         <td>{{ post.boardViewCount }}</td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <button @click="goToAddboard()" class="write-btn">글쓰기</button>
+                            <button @click="goToCreateboard()" class="write-btn">작성하기</button>
                         </div>
                     </div>
                 </div>
@@ -98,6 +101,20 @@ function goToLoginpage() {
 </template>
 
 <style scoped>
+
+.title {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #d81f26;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .board-container {
     width: 1000px;
     background-color: white;
@@ -120,27 +137,28 @@ function goToLoginpage() {
 }
 
 .board-table th {
-    background-color: #333;
+    background-color: #d81f26;
     color: white;
     font-weight: bold;
 }
 
 .board-table td {
-    background-color: #f7f7f7;
+    background-color: #fff3f3;
     color: #333;
 }
 
 .write-btn {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #d81f26;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     text-align: center;
+    font-weight: bold;
 }
 
 .write-btn:hover {
-    background-color: #0056b3;
+    background-color: #d81f26;
 }
 </style>
