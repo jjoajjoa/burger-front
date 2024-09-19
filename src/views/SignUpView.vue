@@ -12,11 +12,11 @@ function goToHome() {
 }
 
 // form input references
-const username = ref('');
+const id = ref('');
 const password = ref('');
 const passwordConfirm = ref('');
 const name = ref('');
-const phone = ref('');
+const mobile = ref('');
 const email = ref(''); // 이메일 아이디 부분
 const emailDomain = ref(''); // 이메일 도메인 부분
 const year = ref(''); // 년도
@@ -25,11 +25,11 @@ const day = ref(''); // 일
 
 // 에러 메시지 상태
 const errors = ref({
-    username: '',
+    id: '',
     password: '',
     passwordConfirm: '',
     name: '',
-    phone: '',
+    mobile: '',
     email: '',
     birthday: ''
 });
@@ -39,18 +39,18 @@ const join = async () => {
     let valid = true;
 
     // 입력 검증
-    if (!username.value) {
-        errors.value.username = '아이디를 입력해주세요.';
+    if (!id.value) {
+        errors.value.id = '아이디를 입력해주세요.';
         valid = false;
     } else {
         try {
             // 아이디 중복 확인
-            const checkUsernameResponse = await axios.post('/api/checkUsername', { userId: username.value });
+            const checkUsernameResponse = await axios.post('/api/checkUsername', { userId: id.value });
             if (!checkUsernameResponse.data) {
-                errors.value.username = '이미 사용 중인 아이디입니다.';
+                errors.value.id = '이미 사용 중인 아이디입니다.';
                 valid = false;
             } else {
-                errors.value.username = ''; // 중복이 없으면 에러 메시지 삭제
+                errors.value.id = ''; // 중복이 없으면 에러 메시지 삭제
             }
         } catch (error) {
             console.error('아이디 중복 확인 오류:', error);
@@ -76,18 +76,18 @@ const join = async () => {
         errors.value.name = '';
     }
 
-    if (!phone.value) {
-        errors.value.phone = '전화번호를 입력해주세요.';
+    if (!mobile.value) {
+        errors.value.mobile = '전화번호를 입력해주세요.';
         valid = false;
     } else {
         try {
             // 전화번호 중복 확인
-            const checkPhoneResponse = await axios.post('/api/checkPhone', { phone: phone.value });
+            const checkPhoneResponse = await axios.post('/api/checkPhone', { userMobile: mobile.value });
             if (!checkPhoneResponse.data) {
-                errors.value.phone = '이미 사용 중인 전화번호입니다.';
+                errors.value.mobile = '이미 사용 중인 전화번호입니다.';
                 valid = false;
             } else {
-                errors.value.phone = ''; // 중복이 없으면 에러 메시지 삭제
+                errors.value.mobile = ''; // 중복이 없으면 에러 메시지 삭제
             }
         } catch (error) {
             console.error('전화번호 중복 확인 오류:', error);
@@ -101,7 +101,7 @@ const join = async () => {
     } else {
         try {
             // 이메일 중복 확인
-            const checkEmailResponse = await axios.post('/api/checkEmail', { email: `${email.value}@${emailDomain.value}` });
+            const checkEmailResponse = await axios.post('/api/checkEmail', { userEmail: `${email.value}@${emailDomain.value}` });
             if (!checkEmailResponse.data) {
                 errors.value.email = '이미 사용 중인 이메일입니다.';
                 valid = false;
@@ -125,11 +125,11 @@ const join = async () => {
     if (valid) {
         try {
             const response = await axios.post('/api/signup', {
-                userId: username.value,
+                userId: id.value,
                 userPw: password.value,
                 userName: name.value,
                 userBirth: `${year.value}-${month.value}-${day.value}`, // 생년월일 조합
-                userMobile: phone.value,
+                userMobile: mobile.value,
                 userEmail: `${email.value}@${emailDomain.value}` // 이메일 조합
             });
 
@@ -159,9 +159,9 @@ const join = async () => {
                         <div class="signup-page">
                             <form class="signup-form" @submit.prevent="join">
                                 <div class="form-group">
-                                    <label for="username">아이디</label>
-                                    <input type="text" id="username" v-model="username" placeholder="아이디 입력" />
-                                    <p class="error-msg" v-if="errors.username">{{ errors.username }}</p>
+                                    <label for="id">아이디</label>
+                                    <input type="text" id="id" v-model="id" placeholder="아이디 입력" />
+                                    <p class="error-msg" v-if="errors.id">{{ errors.id }}</p>
                                 </div>
 
                                 <div class="form-group">
@@ -183,9 +183,9 @@ const join = async () => {
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="phone">전화번호</label>
-                                    <input type="tel" id="phone" v-model="phone" placeholder="휴대폰 번호 입력 ('-' 제외 11자리 입력)" />
-                                    <p class="error-msg" v-if="errors.phone">{{ errors.phone }}</p>
+                                    <label for="mobile">전화번호</label>
+                                    <input type="tel" id="mobile" v-model="mobile" placeholder="휴대폰 번호 입력 ('-' 제외 11자리 입력)" />
+                                    <p class="error-msg" v-if="errors.mobile">{{ errors.mobile }}</p>
                                 </div>
 
                                 <div class="form-group email-group">

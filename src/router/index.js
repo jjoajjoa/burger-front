@@ -4,8 +4,12 @@ import LoginView from '../views/LoginView.vue'
 import SignUpView from '../views/SignUpView.vue'
 import FindAccountView from '../views/FindAccountView.vue'
 import GamePlay from '@/components/menu/GamePlay.vue'
+import MypageProfileView from '../views/MypageProfileView.vue'
+import MypageBoardView from '../views/MypageBoardView.vue'
 import BoardView from '../views/BoardView.vue'
-import BoardDetail from '@/components/board/BoardDetail.vue'
+import AddBoardView from '../views/AddBoardView.vue'
+import BoardDetailView from '@/views/BoardDetailView.vue';
+import BurgerKingView from '@/views/BurgerKingView.vue'
 
 const routes = [
     {
@@ -39,16 +43,36 @@ const routes = [
         component: FindAccountView
     },
     {
-        path: '/board',
-        name: 'board',
-        component: BoardView,
+        path: '/mypage',
+        name: 'mypage',
+        component: MypageProfileView
     },
     {
-        path: '/board/:id',
-        name: 'board-detail',
-        component: BoardDetail,
+        path: '/myboard',
+        name: 'myboard',
+        component: MypageBoardView
     },
-
+    {
+        path: '/board',
+        name: 'board',
+        component: BoardView
+    },
+    {
+        path: '/addboard',
+        name: 'addboard',
+        component: AddBoardView
+    },
+    {
+        path: '/board/:boardPk',
+        name: 'BoardDetail',
+        component: BoardDetailView,
+        props: true,
+    },
+    {
+        path: '/burgerking',
+        name: 'burgerking',
+        component: BurgerKingView,
+    },
 ]
 
 const router = createRouter({
