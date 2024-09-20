@@ -48,17 +48,20 @@ const GetIngrList = async () => {
 
 //재료리스트보여주고 클릭할때 id를 서버로 던지기
 const IngrClick = async (ingrPk) => {
-    console.log("Current selectedIngr length before check:", selectedIngr.value.length);
+    // 재료 개수 확인
+    if (selectedIngr.value.length >= 8) {
+        console.log("Ingredient limit reached, showing warning modal");
+        return;
+    }
 
     try {
         const response = await axios.post('/api/IngrListId', { ingrPk });
         IngrListByGamePk.value = response.data.data;
         
-        // 재료 추가 (이 부분이 잘 동작하는지 확인)
-        console.log("Before pushing ingrPk:", selectedIngr.value);
+        // 중복 선택을 허용하여 재료를 계속 추가
         selectedIngr.value.push(ingrPk);
-        console.log("After pushing ingrPk:", selectedIngr.value);
-        
+        console.log("Selected ingredients:", selectedIngr.value);
+
     } catch (error) {
         console.error('There was an error!', error);
         IngrListByGamePk.value = 'Error!';
@@ -124,7 +127,9 @@ function goToGameMenu() {
                                 <div class="row">
                                     <!--왼쪽 버거 쌓기 시작-->
                                     <div class="col-6">
-                                        <div></div>
+                                        <div class="card-burger-poor" style="font-size: 15px; font-weight: bold; text-align: center;">
+                                            버거 재료는 최대 8개까지 선택가능합니다
+                                        </div>
                                         <div class="card-burger-poor">
                                             <div class="row mt-10 me-10 ms-10 mb-10 selected-ingredients-container">
                                                 <div>
@@ -154,11 +159,9 @@ function goToGameMenu() {
                                     <!--오른쪽 버거재료선택, 버거완성 시작-->
                                     <div class="col-6">
                                         <div class="row">
-                                            <div class="col-1">
-                                            </div>
-                                            <div class="col-11">
+                                            <div class="col-12">
                                                 <div class="mt-6"></div>
-                                                <button class="btn btn-outline-danger burgerScoreButton" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target1" @click="burgerScore()" style="cursor: pointer; transition: transform 0.3s ease;">버거완성</button>
+                                                <button class="btn btn-outline-danger burgerScoreButton" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target1" @click="burgerScore()" style="cursor: pointer; transition: transform 0.3s ease;">버거 완성</button>
                                             </div>
                                         </div>
                                         <div class="mt-10"></div>
@@ -248,7 +251,6 @@ function goToGameMenu() {
         <!--end::Modal - New Target-->
     </div>
     <!--점수 버튼 누르면 나오는 모달-->
-    
 
 
 
@@ -257,12 +259,13 @@ function goToGameMenu() {
 <style scoped>
 
 .menu-card {
-    border: 2px solid #ccc; 
+    border: 2px solid #434040; 
     border-radius: 5px; 
-    box-shadow: 0px 2px 5px rgba(184, 181, 181, 0.1); 
+    box-shadow: 0px 2px 5px rgba(32, 31, 31, 0.1); 
     max-width: 600px; 
     margin: 20px auto; 
-    position: relative; 
+    position: relative;
+    font-weight: bold;
 }
 
 .menu-card::after {
@@ -327,7 +330,7 @@ function goToGameMenu() {
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 11px;
+    font-size: 20px;
     font-weight: 800;
 }
 

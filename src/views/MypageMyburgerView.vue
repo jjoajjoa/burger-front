@@ -39,6 +39,17 @@ function goToProfileInMypage() {
     router.replace({ path: '/mypage' });
 }
 
+function groupByGamePk(list) {
+    return list.reduce((groups, item) => {
+        const gamePk = item.gamePk;
+        if (!groups[gamePk]) {
+            groups[gamePk] = [];
+        }
+        groups[gamePk].push(item);
+        return groups;
+    }, {});
+}
+
 </script>
 
 <template>
@@ -64,24 +75,29 @@ function goToProfileInMypage() {
                                 <table class="my-table">
                                     <thead>
                                         <tr>
-                                            <th class="col-2">버거 카테고리</th>
-                                            <th class="col-10">내가 만든 버거</th>
+                                            <th class="col-12">내가 만든 버거</th>
                                         </tr>
                                     </thead>
                                 </table>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-1">
-                                        냠냠
-                                        </div>
-                                        <div class="col-11">
-                                            <div class="card">
-                                                <div v-for="(item) in IngrListByUserPk" :key="item.ingrPk">
-                                                    <!-- 수량만큼 재료를 반복해서 보여줌 -->
-                                                    <div v-for="n in item.ingrUsageQuantity" :key="n" class="row">
-                                                        <div class="imageContainer2 col-10">
-                                                            <img :src="require('@/assets' + item.ingrSideUrl)"  class="ingrImage2">
+                                        <div class="col-12">
+                                            <div class="card" style="max-height: 700px; overflow-y: auto;">
+                                                <div class="row mt-10 ms-15 mb-5">
+                                                    <div class="col-6" v-for="(group, gamePk) in groupByGamePk(IngrListByUserPk)" :key="gamePk">
+                                                    <h4>{{ gamePk }} 번째 버거</h4>
+                                                    <div class="bread-top">
+                                                        <img src="@/assets/images/bread_side.png" style="width: 200px; height: auto; object-fit: contain;">
+                                                    </div>
+                                                        <div v-for="item in group" :key="item.ingrPk">
+                                                            <div class="imageContainer2">
+                                                                <img :src="require('@/assets' + item.ingrSideUrl)" class="ingrImage2">
+                                                            </div>
                                                         </div>
+                                                        <div class="bread-bottom">
+                                                            <img src="@/assets/bread_bottom.png" style="width: 200px; height: auto; object-fit: contain;">
+                                                        </div>
+                                                        <div class="mb-10"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,12 +125,12 @@ function goToProfileInMypage() {
     display: flex;
     flex-direction: row;
     align-items: center; 
-    width: 400px;
-    height: 70px;
+    width: 100px;
+    height: 50px;
 }
 
 .ingrImage2 {
-    width: 300px;
+    width: 200px;
     height: auto;
     object-fit: contain;
     margin-right: 10px;
