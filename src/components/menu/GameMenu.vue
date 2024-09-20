@@ -55,8 +55,7 @@ burgerlist();
                                     <div class="col-10">
                                         <div class="row">
                                             <div class="col-4 d-flex flex-column align-items-center burger-category-item" style="cursor: pointer; transition: transform 0.3s ease;" v-for="(item) in burgercategory" :key="item.burgerId">
-                                                <img src="@/assets/burger_img.png">
-                                                <button @click="burgerclick(item.burgerId)" class="btn custom-btn">{{ item.burgerName }}</button>
+                                                <button @click="burgerclick(item.burgerId)" class="btn custom-btn"> <img src="@/assets/burger_img.png"> <br>{{ item.burgerName }}</button>
                                             </div>
                                         </div>
                                     </div>
