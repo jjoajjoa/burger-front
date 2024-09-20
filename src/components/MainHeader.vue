@@ -50,6 +50,11 @@ function goToBoard() {
 function goToBurgerking() {
     router.replace({ path: '/burgerking' });
 }
+
+// 버거킹 페이지로 이동 함수
+function goToBurgerMenu() {
+    router.replace({ path: '/burgerMenu' });
+}
 </script>
 
 <template>
@@ -60,7 +65,7 @@ function goToBurgerking() {
 
         <nav class="navigation">
             <ul class="nav-center">
-                <li><a href="#" class="cursor-pointer">Menu</a></li>
+                <li><a @click="goToBurgerMenu" class="cursor-pointer">Menu</a></li>
                 <li><a @click="goToBurgerking" class="cursor-pointer">Burger King</a></li>
                 <li><a @click="goToBoard" class="cursor-pointer">Board</a></li>
                 <li><a @click="goToMypage" class="cursor-pointer">My Page</a></li>

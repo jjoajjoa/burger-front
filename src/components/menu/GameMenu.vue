@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-import router from '@/router/index.js'
+import router from '@/router/index.js';
+import MainHeader from '@/components/MainHeader.vue';
+import MainFooter from '@/components/MainFooter.vue';
 
 const burgercategory = ref([]);
 
@@ -28,6 +30,7 @@ burgerlist();
 </script>
 
 <template>
+    <MainHeader />
     <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper" style="height: 100vh;">
         <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
             <div class="d-flex flex-column flex-column-fluid">
@@ -67,6 +70,7 @@ burgerlist();
             </div>
         </div>
     </div>
+    <MainFooter />
 </template>
 
 <style scoped>

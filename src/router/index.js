@@ -11,6 +11,7 @@ import BoardView from '../views/BoardView.vue'
 import AddBoardView from '../views/AddBoardView.vue'
 import BoardDetailView from '@/views/BoardDetailView.vue';
 import BurgerKingView from '@/views/BurgerKingView.vue'
+import MypageMyBurgerView from '@/views/MypageMyburgerView.vue'
 
 const routes = [
     {
@@ -57,6 +58,11 @@ const routes = [
         path: '/myboard',
         name: 'myboard',
         component: MypageBoardView
+    },
+    {
+        path: '/myburger',
+        name: 'myburger',
+        component: MypageMyBurgerView
     },
     {
         path: '/board',
