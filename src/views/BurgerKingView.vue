@@ -7,9 +7,7 @@ import MainFooter from '@/components/MainFooter.vue';
 const burgerTypes = ref([
     { id: 1, name: 'BURGUNDY' },
     { id: 2, name: '김숙자 버거' },
-    { id: 3, name: '존버.거' },
-    { id: 4, name: '먹다남은버거' },
-    { id: 5, name: '치즈없으면난못해' }
+    { id: 3, name: '존버.거' }
 ]);
 
 const burgerRankings = ref({});

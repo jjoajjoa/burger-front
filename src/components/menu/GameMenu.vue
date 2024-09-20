@@ -31,23 +31,16 @@ burgerlist();
 
 <template>
     <MainHeader />
-    <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper" style="height: 100vh;">
         <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+            <div class="image-container position-relative">
+                <img src="../../assets/images/menu-header.jpg" alt="Menu Header" class="menu-image">
+                <h1 class="header-text">Menu</h1>
+            </div>
             <div class="d-flex flex-column flex-column-fluid">
                 <div id="kt_app_content" class="app-content flex-column-fluid">
                     <div id="kt_app_content_container" class="app-container container-xxl">
                         <div class="d-flex flex-column flex-xl-row">
                             <div class="container">
-                                <!--메뉴사진 시작-->
-                                <div class="row" style="height:200px;">
-                                    <div class="col-12">
-                                        <div>
-                                            <img src="@/assets/menu_burger.png"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--메뉴사진 끝-->
                                 <!--버거선택 시작-->
                                 <div class="mt-15"></div>
                                 <div class="row">
@@ -68,7 +61,6 @@ burgerlist();
                 </div>
             </div>
         </div>
-    </div>
     <MainFooter />
 </template>
 

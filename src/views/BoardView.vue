@@ -55,17 +55,19 @@ function goToLoginpage() {
 <template>
     <MainHeader />
 
-    <div class="app-main flex-column flex-row-fluid" id="kt_app_main" style="flex-grow: 1; overflow: auto;">
-        <div class="d-flex flex-column flex-column-fluid"
-            style="flex-grow: 1; justify-content: center; align-items: center;">
-            <div id="kt_app_content" class="app-content flex-column-fluid"
-                style="flex-grow: 1; display: flex; flex-direction: column;">
-                <div id="kt_app_content_container" class="app-container container-xxl"
-                    style="flex-grow: 1; padding: 50px 0; display: flex; justify-content: center; align-items: center;">
-                    <div class="d-flex flex-column flex-xl-row"
-                        style="flex-grow: 1; justify-content: center; align-items: center;">
+    <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+        <div class="image-container position-relative">
+            <img src="../assets/images/menu-header.jpg" alt="Menu Header" class="menu-image">
+            <h1 class="header-text">Board</h1>
+        </div>
+        <div class="d-flex flex-column flex-column-fluid justify-content-center align-items-center flex-grow-1">
+            <div id="kt_app_content" class="app-content flex-column-fluid d-flex flex-grow-1 flex-column">
+                <div id="kt_app_content_container" class="app-container container-xxl d-flex justify-content-center align-items-center flex-grow-1 p-5">
+                    <div class="d-flex flex-column flex-xl-row justify-content-center align-items-center flex-grow-1">
                         <div class="board-container">
-                            <h3 class="title">게시판</h3>
+                            <div class="d-flex justify-content-end mb-5">
+                                <button @click="goToCreateboard()" class="write-btn">작성하기</button>
+                            </div>
                             <table class="board-table">
                                 <thead>
                                     <tr>
@@ -79,8 +81,7 @@ function goToLoginpage() {
                                 <tbody>
                                     <tr v-for="(post, index) in posts" :key="index">
                                         <td>{{ index + 1 }}</td> <!-- 번호 역순 -->
-                                        <td><router-link @click="goToBoardDetail()"
-                                                :to="{ name: 'BoardDetail', params: { boardPk: post.boardPk } }">
+                                        <td><router-link @click="goToBoardDetail()" :to="{ name: 'BoardDetail', params: { boardPk: post.boardPk } }">
                                                 {{ post.boardTitle }}
                                             </router-link></td>
                                         <td >{{ post.userName }}</td>
@@ -89,7 +90,6 @@ function goToLoginpage() {
                                     </tr>
                                 </tbody>
                             </table>
-                            <button @click="goToCreateboard()" class="write-btn">작성하기</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,6 @@ function goToLoginpage() {
 </template>
 
 <style scoped>
-
 .title {
     display: block;
     width: 100%;
@@ -117,10 +116,6 @@ function goToLoginpage() {
 
 .board-container {
     width: 1000px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .board-table {

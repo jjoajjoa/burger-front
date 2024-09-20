@@ -1,50 +1,3 @@
-<template>
-    <section class="image-gallery">
-        <div class="image-container-main">
-            <div class="large-image-container">
-                <img src="@/assets/images/main.jpg" alt="Image 1" class="large-image">
-                <div class="overlay-text">Handcrafted</div>
-                <div class="overlay-text">Burgers &amp; Fries</div>
-                <div class="overlay-text">since 1986</div>
-            </div>
-            <div class="right-images">
-                <img src="@/assets/images/main2.jpg" alt="Image 2" class="small-image">       
-                <div v-if="isLoggedIn" class="login-overlay">
-                    <div v-if="!showResult" class="box">
-                        <h2>나의 버거 찾기</h2>
-                        <div class="question">
-                            <p>버거를 좋아하십니까?</p>
-                            <label><input type="radio" v-model="burger" value="yes"> Yes</label>
-                            <label><input type="radio" v-model="burger" value="no"> No</label>
-                        </div>
-                        <div class="question">
-                            <p>쪼랭이를 좋아하십니까?</p>
-                            <label><input type="radio" v-model="jorengi" value="yes"> Yes</label>
-                            <label><input type="radio" v-model="jorengi" value="no"> No</label>
-                        </div>
-                        <div class="question">
-                            <p>코딩을 좋아하십니까?</p>
-                            <label><input type="radio" v-model="coding" value="yes"> Yes</label>
-                            <label><input type="radio" v-model="coding" value="no"> No</label>
-                        </div>
-                        <div class="question">
-                            <p>이희만 강사님을 좋아하십니까?</p>
-                            <label><input type="radio" v-model="teacher" value="yes"> Yes</label>
-                            <label><input type="radio" v-model="teacher" value="no"> No</label>
-                        </div>
-                        <button @click="insertTest" :disabled="!burger || !jorengi || !coding || !teacher">결과 확인하기</button>
-                    </div>
-                    <div v-else class="box">
-                        <p v-if="resultTest">{{ resultTest.testTypeResult }}</p>
-                        <h3 v-if="resultTest">{{ resultTest.testTypeDetails }}</h3>
-                        <button @click="resetForm">다시 선택하기</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</template>
-
 <script setup>
 
 import { ref, onMounted, provide } from 'vue';
@@ -73,7 +26,7 @@ const insertTest = async () => {
             coding: coding.value === 'yes' ? 1 : 0,
             teacher: teacher.value === 'yes' ? 1 : 0,
         });
-        console.log('insertTest>>>>>>>>>', response);
+        //console.log('insertTest>>>>>>>>>', response);
         result.value = response.data;
         showResult.value = true;
         const resUserPk = response.data.userPk;
@@ -91,15 +44,14 @@ const getResult = async (userPk) => {
         const response = await axios.get('/api/getTest', { 
             params: { userPk }
         });
-        console.log('getResult>>>>>>>>>>>>>', response);
+        //console.log('getResult>>>>>>>>>>>>>', response);
         resultTest.value = response.data;
         showResult.value = true;
         
     } catch (error) {
-        console.error('테스트 DB 가져오기:', error.message || error);
+        //console.error('테스트 DB 가져오기:', error.message || error);
     }
 };
-
 
 // 폼 초기화 함수
 const resetForm = () => {
@@ -126,4 +78,48 @@ onMounted(() => {
 getResult();
 </script>
 
-<style scoped></style>
+<template>
+    <section class="image-gallery">
+        <div class="image-container-main">
+            <div class="large-image-container">
+                <img src="@/assets/images/main.jpg" alt="Image 1" class="large-image">
+                <div class="overlay-text">Burgers & Fries</div>
+                <div class="overlay-text">Handcrafted</div>
+            </div>
+            <div class="right-images">
+                <img src="@/assets/images/main2.jpg" alt="Image 2" class="small-image">       
+                <div v-if="isLoggedIn" class="login-overlay">
+                    <div v-if="!showResult" class="box">
+                        <h2>나의 버거 찾기</h2>
+                        <div class="question">
+                            <p>버거를 좋아하십니까?</p>
+                            <label><input type="radio" v-model="burger" value="yes"> Yes</label>
+                            <label class="ms-5"><input type="radio" v-model="burger" value="no"> No</label>
+                        </div>
+                        <div class="question">
+                            <p>쪼랭이를 좋아하십니까?</p>
+                            <label><input type="radio" v-model="jorengi" value="yes"> Yes</label>
+                            <label class="ms-5"><input type="radio" v-model="jorengi" value="no"> No</label>
+                        </div>
+                        <div class="question">
+                            <p>코딩을 좋아하십니까?</p>
+                            <label><input type="radio" v-model="coding" value="yes"> Yes</label>
+                            <label class="ms-5"><input type="radio" v-model="coding" value="no"> No</label>
+                        </div>
+                        <div class="question">
+                            <p>이희만 강사님을 좋아하십니까?</p>
+                            <label><input type="radio" v-model="teacher" value="yes"> Yes</label>
+                            <label class="ms-5"><input type="radio" v-model="teacher" value="no"> No</label>
+                        </div>
+                        <button class="btn-red" @click="insertTest" :disabled="!burger || !jorengi || !coding || !teacher">결과 확인하기</button>
+                    </div>
+                    <div v-else class="box">
+                        <p v-if="resultTest">{{ resultTest.testTypeResult }}</p>
+                        <h3 v-if="resultTest">{{ resultTest.testTypeDetails }}</h3>
+                        <button @click="resetForm">다시 선택하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

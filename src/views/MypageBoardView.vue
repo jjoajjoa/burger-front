@@ -55,6 +55,11 @@ function goToProfileInMypage() {
     router.replace({ path: '/mypage' });
 }
 
+//내가 만든 버거로 이동함수
+function goToMyburgerInmypage() {
+    router.replace({ path: '/myburger' });
+}
+
 function goToBoardDetail(boardPk) {
     router.push({ name: 'BoardDetail', params: { boardPk } });
 }
@@ -72,9 +77,9 @@ function goToBoardDetail(boardPk) {
                         <div class="profile-container">
 
                             <div class="sidebar" style="margin-right: 20px;">
-                                <div class="level-main">{{ user.userName }}님의 햄버거만들기 </div>
+                                <!--<div class="level-main">{{ user.userName }}님의 햄버거만들기 </div>-->
                                 <div class="level">LV.1</div>
-                                <button class="menu-button">내가 만든 버거</button>
+                                <button @click="goToMyburgerInmypage" class="menu-button">내가 만든 버거</button>
                                 <button @click="goToBoardInMypage" class="menu-button">내가 쓴 게시물</button>
                                 <button @click="goToProfileInMypage" class="menu-button">개인정보 수정</button>
                             </div>
