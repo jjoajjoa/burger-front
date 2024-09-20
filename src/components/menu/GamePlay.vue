@@ -21,7 +21,7 @@ const selectedIngr = ref([]);
 //선택한 버거 카테고리id를 서버에 보내기 
 const burgerCategoryId = async () => {
     try {
-        const response = await axios.post('/api/burgerlistid', { burgerId : burgerId });
+        const response = await axios.post('/api/burgerlistid', { burgerId: burgerId });
         console.log('Response from server:', response.data);
     } catch (error) {
         console.error('There was an error!', error);
@@ -57,7 +57,7 @@ const IngrClick = async (ingrPk) => {
     try {
         const response = await axios.post('/api/IngrListId', { ingrPk });
         IngrListByGamePk.value = response.data.data;
-        
+
         // 중복 선택을 허용하여 재료를 계속 추가
         selectedIngr.value.push(ingrPk);
         console.log("Selected ingredients:", selectedIngr.value);
@@ -82,7 +82,7 @@ const burgerScore = async () => {
 //삭제하기
 const deleteIngr = async (ingrPk) => {
     try {
-        const response = await axios.post('/api/deleteIngr', { ingrPk : ingrPk });
+        const response = await axios.post('/api/deleteIngr', { ingrPk: ingrPk });
         IngrListByGamePk.value = response.data;
         selectedIngr.value = selectedIngr.value.filter(item => item !== ingrPk);
     } catch (error) {
@@ -98,7 +98,7 @@ function goToGamePlay() {
 
 //점수모달에서 나가기 버튼 눌렀을때
 function goToGameMenu() {
-    router.replace({path: '/burgerMenu', query: {} });
+    router.replace({ path: '/burgerMenu', query: {} });
 }
 
 
@@ -107,80 +107,80 @@ function goToGameMenu() {
 
 <template>
     <MainHeader />
-    <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper" style="height: 100vh;">
-        <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
-            <div class="d-flex flex-column flex-column-fluid">
-                <div id="kt_app_content" class="app-content flex-column-fluid">
-                    <div id="kt_app_content_container" class="app-container container-xxl">
-                        <div class="d-flex flex-column flex-xl-row">
-                            <div class="container">
-                                <!--메뉴사진 시작-->
-                                <div class="row" style="height:200px;">
-                                    <div class="col-12">
-                                        <div>
-                                            <img src="@/assets/menu_burger.png"
-                                            style="width: 100%; height: 100%; object-fit: cover;">
+    <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+        <div class="image-container position-relative">
+            <img src="../../assets/images/menu-header.jpg" alt="Menu Header" class="menu-image">
+            <h1 class="header-text">Game</h1>
+        </div>
+        <div class="d-flex flex-column flex-column-fluid">
+            <div id="kt_app_content" class="app-content flex-column-fluid">
+                <div id="kt_app_content_container" class="app-container container-xxl">
+                    <div class="d-flex flex-column flex-xl-row">
+                        <div class="container">
+                            <div class="row">
+                                <!--왼쪽 버거 쌓기 시작-->
+                                <div class="col-6">
+                                    <div class="card-burger-poor"
+                                        style="font-size: 15px; font-weight: bold; text-align: center;">
+                                        버거 재료는 최대 8개까지 선택가능합니다
+                                    </div>
+                                    <div class="card-burger-poor">
+                                        <div class="row mt-10 me-10 ms-10 mb-10 selected-ingredients-container">
+                                            <div>
+                                                <img src="@/assets/images/bread_side.png"
+                                                    style="width: 300px; height: auto; object-fit: contain;">
+                                            </div>
+                                            <div class="mt-5"></div>
+                                            <div v-for="(item) in IngrListByGamePk" :key="item.ingrPk">
+                                                <!-- 수량만큼 재료를 반복해서 보여줌 -->
+                                                <div v-for="n in item.ingrUsageQuantity" :key="n" class="row">
+                                                    <div class="imageContainer2 col-10">
+                                                        <img :src="require('@/assets' + item.ingrSideUrl)"
+                                                            class="ingrImage2">
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <button @click="deleteIngr(item.ingrPk)"
+                                                            class="btn btn-outline-danger burgerScoreButton">삭제</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img src="@/assets/bread_bottom.png"
+                                                    style="width: 300px; height: auto; object-fit: contain;">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!--메뉴사진 끝-->
-                                <div class="row">
-                                    <!--왼쪽 버거 쌓기 시작-->
-                                    <div class="col-6">
-                                        <div class="card-burger-poor" style="font-size: 15px; font-weight: bold; text-align: center;">
-                                            버거 재료는 최대 8개까지 선택가능합니다
+                                <!--왼쪽 버거 쌓기 끝-->
+                                <!--오른쪽 버거재료선택, 버거완성 시작-->
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mt-6"></div>
+                                            <button class="btn btn-outline-danger burgerScoreButton"
+                                                data-bs-toggle="modal" data-bs-target="#kt_modal_new_target1"
+                                                @click="burgerScore()"
+                                                style="cursor: pointer; transition: transform 0.3s ease;">버거 완성</button>
                                         </div>
-                                        <div class="card-burger-poor">
-                                            <div class="row mt-10 me-10 ms-10 mb-10 selected-ingredients-container">
-                                                <div>
-                                                    <img src="@/assets/images/bread_side.png"
-                                                    style="width: 300px; height: auto; object-fit: contain;">
+                                    </div>
+                                    <div class="mt-10"></div>
+                                    <div class="menu-card" style="max-height: 700px; overflow-y: auto;">
+                                        <div class="row mt-5 me-5 ms-5 mb-5">
+                                            <div class="col-4" v-for="(item) in IngrList" :key="item.ingrPk">
+                                                <div class="imageContainer">
+                                                    <img :src="require('@/assets' + item.ingrUrl)" class="ingrImage">
                                                 </div>
-                                                <div class="mt-5"></div>
-                                                <div v-for="(item) in IngrListByGamePk" :key="item.ingrPk">
-                                                    <!-- 수량만큼 재료를 반복해서 보여줌 -->
-                                                    <div v-for="n in item.ingrUsageQuantity" :key="n" class="row">
-                                                        <div class="imageContainer2 col-10">
-                                                            <img :src="require('@/assets' + item.ingrSideUrl)"  class="ingrImage2">
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <button @click="deleteIngr(item.ingrPk)" class="btn btn-outline-danger burgerScoreButton">삭제</button>
-                                                        </div>
-                                                    </div>
+                                                <div class="d-flex justify-content-center mt-2">
+                                                    <button @click="IngrClick(item.ingrPk)"
+                                                        :disabled="selectedIngr.length >= 8" class="btn btn-light">{{
+                                                        item.ingrName }}</button>
                                                 </div>
-                                                <div>
-                                                    <img src="@/assets/bread_bottom.png"
-                                                    style="width: 300px; height: auto; object-fit: contain;">
-                                                </div>
+                                                <div class="mt-2"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--왼쪽 버거 쌓기 끝-->
-                                    <!--오른쪽 버거재료선택, 버거완성 시작-->
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="mt-6"></div>
-                                                <button class="btn btn-outline-danger burgerScoreButton" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target1" @click="burgerScore()" style="cursor: pointer; transition: transform 0.3s ease;">버거 완성</button>
-                                            </div>
-                                        </div>
-                                        <div class="mt-10"></div>
-                                        <div class="menu-card" style="max-height: 700px; overflow-y: auto;">
-                                            <div class="row mt-5 me-5 ms-5 mb-5">
-                                                <div class="col-4" v-for="(item) in IngrList" :key="item.ingrPk">
-                                                    <div class="imageContainer">
-                                                        <img :src="require('@/assets' + item.ingrUrl)"  class="ingrImage">
-                                                    </div>
-                                                    <div class="d-flex justify-content-center mt-2">
-                                                        <button @click="IngrClick(item.ingrPk)" :disabled="selectedIngr.length >= 8" class="btn btn-light">{{ item.ingrName }}</button>
-                                                    </div>
-                                                    <div class="mt-2"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--오른쪽 버거재료선택, 버거완성 끝-->
                                 </div>
+                                <!--오른쪽 버거재료선택, 버거완성 끝-->
                             </div>
                         </div>
                     </div>
@@ -228,14 +228,13 @@ function goToGameMenu() {
                             <!--end::Heading-->
                             <!--begin::Actions-->
                             <div class="text-center">
-                                <button type="reset" id="kt_modal_new_target_cancel"
-                                    class="btn btn-light me-3" @click="goToGamePlay()">다시하기</button>
-                                <button type="submit" id="kt_modal_new_target_submit"
-                                    class="btn btn-primary" @click="goToGameMenu()">
+                                <button type="reset" id="kt_modal_new_target_cancel" class="btn btn-light me-3"
+                                    @click="goToGamePlay()">다시하기</button>
+                                <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary"
+                                    @click="goToGameMenu()">
                                     <span class="indicator-label">나가기</span>
                                     <span class="indicator-progress">Please wait...
-                                        <span
-                                            class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
                             <!--end::Actions-->
@@ -257,13 +256,12 @@ function goToGameMenu() {
 </template>
 
 <style scoped>
-
 .menu-card {
-    border: 2px solid #434040; 
-    border-radius: 5px; 
-    box-shadow: 0px 2px 5px rgba(32, 31, 31, 0.1); 
-    max-width: 600px; 
-    margin: 20px auto; 
+    border: 2px solid #434040;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(32, 31, 31, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
     position: relative;
     font-weight: bold;
 }
@@ -274,28 +272,26 @@ function goToGameMenu() {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 10px; 
-    background: repeating-linear-gradient(
-        135deg,
-        #ccc,
-        #ccc 10px,
-        #fff 10px,
-        #fff 20px
-    );
+    height: 10px;
+    background: repeating-linear-gradient(135deg,
+            #ccc,
+            #ccc 10px,
+            #fff 10px,
+            #fff 20px);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     z-index: 1;
 }
 
 .imageContainer {
-  width: 150px;
-  height: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 .ingrImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .selected-ingredients-container {
@@ -304,13 +300,13 @@ function goToGameMenu() {
     align-items: center;
     padding: 10px;
     width: 100%;
-    gap: 5px; 
+    gap: 5px;
 }
 
 .imageContainer2 {
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    align-items: center;
     width: 400px;
     height: 70px;
 }
