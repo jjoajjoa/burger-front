@@ -20,7 +20,7 @@ const fetchRankings = async () => {
             axios.get('/api/burgergamepoor'),
         ]);
 
-        //console.log(topResponse.data);
+        //console.log(bottomResponse.data);
 
         const rankings = {};
 
