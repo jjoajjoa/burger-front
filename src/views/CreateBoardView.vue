@@ -12,7 +12,7 @@ const boardBody = ref('');
 // 게시글 저장 함수
 const savePost = async () => {
   try {
-    const response = await axios.post('/api/add', {
+    const response = await axios.post('/api/create', {
       boardTitle: boardTitle.value,
       boardBody: boardBody.value,
     });
@@ -29,7 +29,7 @@ const savePost = async () => {
 
 // 로그인 페이지로 이동 함수
 function goToBoard() {
-    router.replace({ path: '/board' });
+  router.replace({ path: '/board' });
 }
 
 </script>
@@ -38,23 +38,16 @@ function goToBoard() {
   <MainHeader />
 
   <div class="app-main flex-column flex-row-fluid" id="kt_app_main" style="flex-grow: 1; overflow: auto;">
-    <div
-      class="d-flex flex-column flex-column-fluid"
-      style="flex-grow: 1; justify-content: center; align-items: center;"
-    >
-      <div
-        id="kt_app_content"
-        class="app-content flex-column-fluid"
-        style="flex-grow: 1; display: flex; flex-direction: column;"
-      >
-        <div
-          id="kt_app_content_container"
-          class="app-container container-xxl"
-          style="flex-grow: 1; padding: 50px 0; display: flex; justify-content: center; align-items: center;"
-        >
-          <div class="d-flex flex-column flex-xl-row" style="flex-grow: 1; justify-content: center; align-items: center;">
+    <div class="d-flex flex-column flex-column-fluid"
+      style="flex-grow: 1; justify-content: center; align-items: center;">
+      <div id="kt_app_content" class="app-content flex-column-fluid"
+        style="flex-grow: 1; display: flex; flex-direction: column;">
+        <div id="kt_app_content_container" class="app-container container-xxl"
+          style="flex-grow: 1; padding: 50px 0; display: flex; justify-content: center; align-items: center;">
+          <div class="d-flex flex-column flex-xl-row"
+            style="flex-grow: 1; justify-content: center; align-items: center;">
             <div class="form-container">
-              <h3 class="title">게시판 글쓰기 양식</h3>
+              <h3 class="title">게시글 작성</h3>
               <input v-model="boardTitle" placeholder="글 제목" class="input-field" />
               <textarea v-model="boardBody" placeholder="글 내용" class="textarea-field"></textarea>
               <button @click="savePost" class="save-btn">저장하기</button>
@@ -69,19 +62,27 @@ function goToBoard() {
 </template>
 
 <style scoped>
-.form-container {
-  width: 600px;
-  background-color: #fff;
-  border-radius: 10px;
+.title {
+  display: block;
+  width: 100%;
   padding: 20px;
+  margin-bottom: 30px;
+  background-color: #d81f26;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.form-container {
+  width: 1000px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 
 .input-field {
   width: 100%;
@@ -102,15 +103,16 @@ function goToBoard() {
 
 .save-btn {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
+    background-color: #d81f26;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .save-btn:hover {
-  background-color: #0056b3;
+  background-color: #d81f26;
 }
 </style>

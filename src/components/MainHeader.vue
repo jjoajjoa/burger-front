@@ -1,8 +1,11 @@
 <script setup>
 import router from '@/router/index.js';
+
 import { ref, onMounted } from 'vue';
 
-const isLoggedIn = ref(false); // 로그인 여부를 확인하는 상태 변수
+
+
+const isLoggedIn = ref(false);
 const username = ref('');
 
 // 컴포넌트가 마운트될 때 localStorage에서 사용자 이름을 가져옴
@@ -79,5 +82,6 @@ function goToBurgerMenu() {
     </header>
 </template>
 
-
-<style scoped></style>
+<style scoped>
+/* 스타일을 여기에 추가하세요 */
+</style>
