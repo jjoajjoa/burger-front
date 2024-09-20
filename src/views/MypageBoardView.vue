@@ -12,6 +12,7 @@ const user = ref({
 
 const posts = ref([]);
 
+
 // 현재 사용자가 로그인되어 있는지 확인
 const isLoggedIn = ref(false);
 
@@ -48,6 +49,16 @@ onMounted(async () => {
 function goToBoardInMypage() {
     router.replace({ path: '/myboard' });
 }
+
+// 개인정보수정 페이지로 이동 함수
+function goToProfileInMypage() {
+    router.replace({ path: '/mypage' });
+}
+
+function goToBoardDetail(boardPk) {
+    router.push({ name: 'BoardDetail', params: { boardPk } });
+}
+
 </script>
 
 <template>
@@ -65,7 +76,7 @@ function goToBoardInMypage() {
                                 <div class="level">LV.1</div>
                                 <button class="menu-button">내가 만든 버거</button>
                                 <button @click="goToBoardInMypage" class="menu-button">내가 쓴 게시물</button>
-                                <button class="menu-button">개인정보 수정</button>
+                                <button @click="goToProfileInMypage" class="menu-button">개인정보 수정</button>
                             </div>
                             
                             <div class="main-content">
@@ -80,9 +91,12 @@ function goToBoardInMypage() {
                                     </thead>
                                     <tbody>
                                         <tr v-for="(post, index) in posts" :key="index">
-                                            <td>{{ index + 1 }}</td>
-                                            <td>{{ post.boardTitle }}</td>
-                                            <td>{{ new Date(post.boardRegDate).toLocaleDateString() }}</td>
+                                        <td>{{ index + 1 }}</td>
+                                        <td><router-link @click="goToBoardDetail(post.boardPk)"
+                                                :to="{ name: 'BoardDetail', params: { boardPk: post.boardPk } }">
+                                                {{ post.boardTitle }}
+                                            </router-link></td>
+                                        <td>{{ post.boardRegDate }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
